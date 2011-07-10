@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import me.m1key.arquillian.entities.Dog;
 
@@ -36,6 +37,7 @@ public class JpaDogRepositoryInjectPcTest {
 	@Inject
 	private JpaDogRepository repository;
 
+	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Deployment
