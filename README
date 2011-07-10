@@ -1,0 +1,12 @@
+The goal of this project is to test Arquillian's ability to @Inject
+@PersistenceContext annotated fields.
+
+There are two unit tests that use an in-memory database instance (powered by
+HSQLDB):
+	* JpaDogRepositoryExplicitSetTest
+	* JpaDogRepositoryInjectPcTest
+
+The first one explicitly sets the @PersistenceContext annotated entity manager
+and all tests should pass. This is not what I want though. I want Arquillian to
+CDI @Inject the persistence context. That's what the other test is testing and
+for now it's failing with a NullPointerException.
