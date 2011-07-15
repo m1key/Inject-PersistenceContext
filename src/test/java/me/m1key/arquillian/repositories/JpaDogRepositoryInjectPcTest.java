@@ -65,7 +65,7 @@ public class JpaDogRepositoryInjectPcTest {
 
 	@Test
 	public void shouldReturnDogsByKnownName() {
-		assertNull(repository.getDogByName(SEGA_NAME));
+		assertNotNull(repository.getDogByName(SEGA_NAME));
 	}
 
 	@Test
@@ -82,8 +82,10 @@ public class JpaDogRepositoryInjectPcTest {
 	}
 
 	private void insertTestData() {
+		entityManager.getTransaction().begin();
 		Dog sega = new Dog(SEGA_NAME);
 		entityManager.persist(sega);
+		entityManager.getTransaction().commit();
 	}
 
 }
