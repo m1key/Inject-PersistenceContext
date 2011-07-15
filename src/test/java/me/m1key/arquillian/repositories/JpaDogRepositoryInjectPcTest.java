@@ -57,6 +57,7 @@ public class JpaDogRepositoryInjectPcTest {
 
 	@Before
 	public void setup() {
+		clearTestData();
 		insertTestData();
 	}
 

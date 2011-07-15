@@ -58,6 +58,7 @@ public class JpaDogRepositoryExplicitSetTest {
 	@Before
 	public void setup() {
 		initialiseEntityManager();
+		clearTestData();
 		insertTestData();
 	}
 
