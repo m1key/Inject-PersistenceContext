@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import me.m1key.arquillian.entities.Dog;
 
@@ -19,6 +20,7 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,7 +50,7 @@ public class JpaDogRepositoryExplicitSetTest {
 						JpaDogRepositoryExplicitSetTest.class.getSimpleName()
 								+ ".jar")
 				.addAsManifestResource(
-						new File("src/test/resources/META-INF/persistence.xml"),
+						new File("src/test/resources/META-INF/persistence-test.xml"),
 						ArchivePaths.create("persistence.xml"))
 				.addClasses(Dog.class, JpaDogRepository.class);
 	}
@@ -66,7 +68,7 @@ public class JpaDogRepositoryExplicitSetTest {
 
 	@Test
 	public void shouldReturnDogsByKnownName() {
-		assertNull(repository.getDogByName(SEGA_NAME));
+		assertNotNull(repository.getDogByName(SEGA_NAME));
 	}
 
 	@Test
@@ -81,6 +83,14 @@ public class JpaDogRepositoryExplicitSetTest {
 		entityManager.getTransaction().commit();
 		assertNotNull(repository.getDogByName(seguniaName));
 	}
+	
+	@After
+	public void clearTestData() {
+		entityManager.getTransaction().begin();
+		Query deleteAllQuery = entityManager.createQuery("DELETE FROM Dog");
+		deleteAllQuery.executeUpdate();
+		entityManager.getTransaction().commit();
+	}
 
 	private void initialiseEntityManager() {
 		EntityManagerFactory entityManagerFactory = Persistence
@@ -90,8 +100,10 @@ public class JpaDogRepositoryExplicitSetTest {
 	}
 
 	private void insertTestData() {
+		entityManager.getTransaction().begin();
 		Dog sega = new Dog(SEGA_NAME);
 		entityManager.persist(sega);
+		entityManager.getTransaction().commit();
 	}
 
 }

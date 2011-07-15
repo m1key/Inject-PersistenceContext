@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import me.m1key.arquillian.entities.Dog;
 
@@ -18,6 +19,7 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -85,6 +87,14 @@ public class JpaDogRepositoryInjectPcTest {
 		entityManager.getTransaction().begin();
 		Dog sega = new Dog(SEGA_NAME);
 		entityManager.persist(sega);
+		entityManager.getTransaction().commit();
+	}
+	
+	@After
+	public void clearTestData() {
+		entityManager.getTransaction().begin();
+		Query deleteAllQuery = entityManager.createQuery("DELETE FROM Dog");
+		deleteAllQuery.executeUpdate();
 		entityManager.getTransaction().commit();
 	}
 
