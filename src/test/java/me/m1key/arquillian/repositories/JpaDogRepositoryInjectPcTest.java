@@ -48,7 +48,7 @@ public class JpaDogRepositoryInjectPcTest {
 						JpaDogRepositoryExplicitSetTest.class.getSimpleName()
 								+ ".jar")
 				.addAsManifestResource(
-						new File("src/test/resources/META-INF/persistence.xml"),
+						new File("src/test/resources/META-INF/persistence-test.xml"),
 						ArchivePaths.create("persistence.xml"))
 				.addClasses(Dog.class, JpaDogRepository.class);
 	}
