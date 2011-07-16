@@ -12,3 +12,5 @@ CDI @Inject the persistence context. That's what the other test is testing.
 
 It now works as long as Arquillian has been build with my change and provided
 that the Hibernate version used includes the fix for HHH-6442.
+
+See ARQ-518.
