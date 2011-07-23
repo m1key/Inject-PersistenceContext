@@ -4,55 +4,37 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 
 	<persistence-unit name="testPu">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 
 		<class>me.m1key.arquillian.entities.Dog</class>
 
 		<properties>
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.format_sql" value="true" />
+			<property name="eclipselink.jdbc.driver" value="org.hsqldb.jdbcDriver" />
+			<property name="eclipselink.jdbc.url" value="jdbc:hsqldb:mem:ipcDb" />
+			<property name="eclipselink.jdbc.user" value="sa" />
+			<property name="eclipselink.jdbc.password" value="" />
+			<property name="eclipselink.target-database"
+				value="org.eclipse.persistence.platform.database.HSQLPlatform" />
+			<property name="eclipselink.logging.level" value="OFF" />
+			<property name="eclipselink.orm.throw.exceptions" value="true" />
 
-			<property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" />
-			<property name="hibernate.connection.url" value="jdbc:hsqldb:mem:ipcDb" />
-
-			<property name="hibernate.connection.username" value="sa" />
-
-			<property name="hibernate.c3p0.min_size" value="5" />
-			<property name="hibernate.c3p0.max_size" value="20" />
-			<property name="hibernate.c3p0.timeout" value="300" />
-			<property name="hibernate.c3p0.max_statements" value="50" />
-			<property name="hibernate.c3p0.idle_test_period" value="3000" />
-
-			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
-
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
+			<property name="eclipselink.ddl-generation.output-mode"
+				value="database" />
 		</properties>
-	</persistence-unit>	
+	</persistence-unit>
 
-<!-- 	<persistence-unit name="testPu">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-
-		<class>me.m1key.arquillian.entities.Dog</class>
-
-		<properties>
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.format_sql" value="true" />
-
-			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost/test" />
-
-			<property name="hibernate.connection.username" value="root" />
-
-			<property name="hibernate.c3p0.min_size" value="5" />
-			<property name="hibernate.c3p0.max_size" value="20" />
-			<property name="hibernate.c3p0.timeout" value="300" />
-			<property name="hibernate.c3p0.max_statements" value="50" />
-			<property name="hibernate.c3p0.idle_test_period" value="3000" />
-
-			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect" />
-
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
-		</properties>
-	</persistence-unit> -->
+	<!-- <persistence-unit name="testPu"> <provider>org.hibernate.ejb.HibernatePersistence</provider> 
+		<class>me.m1key.arquillian.entities.Dog</class> <properties> <property name="hibernate.show_sql" 
+		value="true" /> <property name="hibernate.format_sql" value="true" /> <property 
+		name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
+		<property name="hibernate.connection.url" value="jdbc:mysql://localhost/test" 
+		/> <property name="hibernate.connection.username" value="root" /> <property 
+		name="hibernate.c3p0.min_size" value="5" /> <property name="hibernate.c3p0.max_size" 
+		value="20" /> <property name="hibernate.c3p0.timeout" value="300" /> <property 
+		name="hibernate.c3p0.max_statements" value="50" /> <property name="hibernate.c3p0.idle_test_period" 
+		value="3000" /> <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect" 
+		/> <property name="hibernate.hbm2ddl.auto" value="create-drop" /> </properties> 
+		</persistence-unit> -->
 
 </persistence>
